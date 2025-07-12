@@ -14,6 +14,7 @@ def filePathCredential=''
 def removeCredentialFiles=false
 def USER_SSH=''
 def SKIP_ANALYZE=false
+def timestamp = ''
 // def prURL=''
 
 pipeline {
@@ -131,7 +132,7 @@ pipeline {
             }
             steps {
                 script {
-                    def timestamp = new Date().format("yyyyMMdd_HHmm")
+                    timestamp = new Date().format("yyyyMMdd_HHmm")
                     filename = "jenkins_credentials_${timestamp}"
                     def jobBaseName = env.JOB_BASE_NAME;
 
@@ -176,6 +177,7 @@ pipeline {
                             code-review \
                             --ci \
                             --agent-file path/to/agent.toml --key-value-pairs "target_branch=${branch},severity_threshold=high,focus_areas=security,performance,include_suggestions=true" \
+                            > review-output-${timestamp}.json 2> review-debug-${timestamp}.log \
                             || exit 1
                     """
                 }
