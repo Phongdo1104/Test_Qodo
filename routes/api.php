@@ -9,3 +9,10 @@ Route::get('/v1/test-api', function () {
         "response_code" => 200
     ]);
 });
+
+Route::get('/hello-world', function () {
+    return json_encode([
+        "text" => "hello world",
+        "response_code" => 200
+    ]);
+});
