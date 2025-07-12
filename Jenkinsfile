@@ -174,7 +174,7 @@ pipeline {
                     docker.image('qodoai/command:latest').inside {
                         sh """
                             qodo \
-                                --prompt code-review \
+                                code-review \
                                 --key-value-pairs "target_branch=${branch},severity_threshold=low,focus_areas=security,performance" \
                                 || exit 1
                         """
