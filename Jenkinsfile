@@ -171,14 +171,13 @@ pipeline {
                     branch = env.SOURCE_BRANCH
                     prId = env.PR_ID
                     // run docker -v first to check
-                    docker.image('qodoai/command:latest').inside {
-                        sh """
-                            qodo \
-                                code-review \
-                                --key-value-pairs "target_branch=${branch},severity_threshold=low,focus_areas=security,performance" \
-                                || exit 1
-                        """
-                    }
+                    sh """
+                        qodo \
+                            code-review \
+                            --ci \
+                            --agent-file path/to/agent.toml --key-value-pairs "target_branch=${branch},severity_threshold=high,focus_areas=security,performance,include_suggestions=true" \
+                            || exit 1
+                    """
                 }
             }
         }
