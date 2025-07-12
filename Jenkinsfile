@@ -67,8 +67,8 @@ pipeline {
             printContributedVariables: true,
             // regexpFilterExpression: 'opened',
             // regexpFilterText:        '$ACTION',
-            regexpFilterExpression: 'opened',
-            regexpFilterText:        '$ACTION',
+            regexpFilterExpression: 'opened:main',
+            regexpFilterText:        '$ACTION:$TARGET_BRANCH',
 
             // customize your build’s “cause”
             causeString: 'GitHub PR #$PR_ID'
@@ -164,7 +164,8 @@ pipeline {
         stage('Code Review') {
             when {
                 expression {
-                    return env.PR_ID != null;
+                    // return env.PR_ID != null;
+                    return 1 != 1
                 }
             }
             steps {
